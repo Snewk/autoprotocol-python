@@ -1079,8 +1079,7 @@ class Protocol(object):
             self.append(Pipette([cons]))
         else:
             self._pipette([cons])
-
-def stamp(self, source_origin, dest_origin, volume, shape=dict(rows=8,
+    def stamp(self, source_origin, dest_origin, volume, shape=dict(rows=8,
               columns=12), mix_before=False, mix_after=False, mix_vol=None,
               repetitions=10, flowrate="100:microliter/second",
               aspirate_speed=None, dispense_speed=None, aspirate_source=None,
