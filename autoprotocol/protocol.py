@@ -413,6 +413,7 @@ class Protocol(object):
             r.opts.pop("discard")
         r.opts["store"] = {"where": str(condition)}
 
+
     def distribute(self, source, dest, volume, allow_carryover=False,
                    mix_before=False, mix_vol=None, repetitions=10,
                    flowrate="100:microliter/second", aspirate_speed=None,
@@ -1079,6 +1080,8 @@ class Protocol(object):
             self.append(Pipette([cons]))
         else:
             self._pipette([cons])
+
+
     def stamp(self, source_origin, dest_origin, volume, shape=dict(rows=8,
               columns=12), mix_before=False, mix_after=False, mix_vol=None,
               repetitions=10, flowrate="100:microliter/second",
@@ -1313,6 +1316,10 @@ class Protocol(object):
         # Initialize input parameters
         source = WellGroup(source_origin)
         dest = WellGroup(dest_origin)
+        source_plate = source.wells[0].container
+        dest_plate = dest.wells[0].container
+        self._adjust_cover(source_plate, "stamp from")
+        self._adjust_cover(dest_plate, "stamp into")
         opts = []  # list of transfers
         oshp = []  # list of shapes
         osta = []  # list of stamp_types
